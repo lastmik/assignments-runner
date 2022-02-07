@@ -1,14 +1,35 @@
 export function add(a, b) {
-  // TODO
-  return a + b
+  let result = a+b;
+  if(!isFinite(result)||typeof(a) !='number'||typeof(b) !='number')
+    return null;
+  else
+    return result;
 }
 
-export function subtract() {
+export function subtract(a, b) {
   // TODO
-  throw 'Not implemented';
+  let result = a-b;
+  if(typeof(a) !='number'||typeof(b) !='number')
+    return null;
+  else
+    return result;
+
 }
 
-export function complex() {
+export function complex(a,b) {
   // TODO:
-  throw 'Not implemented';
+  let isNumber = true;
+  let arr = a.concat(b);
+  arr.forEach(element => {
+    if(typeof(element)!='number')
+    isNumber=false;
+  });
+
+  let result = (a[0]*a[1]) ** (b[0]/b[1]);
+
+  if(!isFinite(result)|| !isNumber)
+    return null;
+  else
+    return result;
+ 
 }
