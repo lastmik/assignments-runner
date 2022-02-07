@@ -1,145 +1,122 @@
-export function counter( initial, counterName) {
+export function counter(initial, counterName) {
   // TODO:
 
   var counter = GetCounter(initial, counterName);
   return counter.count(initial);
-
 }
 
-function GetCounter(initial, name ) {
+function GetCounter(initial, name) {
   var counter;
-  if(typeof initial ==="string")
-  {
+  if (typeof initial === "string") {
     Counters.get("default").result = 0;
     counter = Counters.get(initial);
-  }else if(typeof name ==="string")
-  {
+  } else if (typeof name === "string") {
     Counters.get("default").result = 0;
     counter = Counters.get(name);
-  }else{
+  } else {
     counter = Counters.get("default");
   }
 
-  if(typeof counter ==="undefined"){
+  if (typeof counter === "undefined") {
     counter = CreateCounter(initial, name);
     return counter;
   }
   return counter;
+}
 
-};
-
-function CreateCounter(initial, name){
-  if(typeof initial ==="undefined")
-  {
+function CreateCounter(initial, name) {
+  if (typeof initial === "undefined") {
     Counters.set("default", new Counter());
     return Counters.get("default");
-  }
-  else if(typeof initial ==="string")
-  {
+  } else if (typeof initial === "string") {
     Counters.set(initial, new Counter());
     return Counters.get(initial);
-  }
-  else if(typeof initial ==="number"&&typeof name ==="undefined")
-  {
+  } else if (typeof initial === "number" && typeof name === "undefined") {
     Counters.set("default", new Counter());
     return Counters.get("default");
-  }
-  else if(typeof initial ==="number"&&typeof name ==="string")
-  {
+  } else if (typeof initial === "number" && typeof name === "string") {
     Counters.set(name, new Counter());
     return Counters.get(name);
   }
-};
+}
 
-class Counter{
+class Counter {
   result;
-  constructor(){
+  constructor() {
     this.result = 0;
   }
-  set result(initial){
+  set result(initial) {
     this.result = initial;
   }
-  count(initial){
-    if(typeof initial ==="number")
-      this.result = initial;
+  count(initial) {
+    if (typeof initial === "number") this.result = initial;
     return this.result++;
   }
-};
+}
 let Counters = new Map();
 
-
-export function callableMultiplier (...args) {
+export function callableMultiplier(...args) {
   // TODO:
   let count = null;
   // if(!args)
   // return result;
 
-  callableMultiplier = function(...args){
-    
-    if(!args.length){
-      let result= count;
+  callableMultiplier = function (...args) {
+    if (!args.length) {
+      let result = count;
       count = null;
       return result;
-  }
-    args.forEach(elem =>{
-      if(!count)
-      count = elem;
-      else
-      count*=elem;
+    }
+    args.forEach((elem) => {
+      if (!count) count = elem;
+      else count *= elem;
     });
 
     return callableMultiplier;
-  }
+  };
 
-  return callableMultiplier(...args)
-};
-
+  return callableMultiplier(...args);
+}
 
 export function createCalculator(initial) {
   // TODO:
-  
-  return new Calculator(initial);
 
+  return new Calculator(initial);
 }
-class Calculator
-{
+class Calculator {
   logs;
   count;
-  constructor(count){
-    typeof count ==='number'?this.count = count:this.count=0;
+  constructor(count) {
+    typeof count === "number" ? (this.count = count) : (this.count = 0);
 
     this.logs = [];
-    this.logF('init', this.count);
+    this.logF("init", this.count);
   }
-  get log(){
+  get log() {
     return this.logs;
   }
-  logF(operation, value){
-    this.logs.push({operation, value})
+  logF(operation, value) {
+    this.logs.push({ operation, value });
   }
 
   add(value) {
-    this.count+=value;
-    this.logF('add', value);
-  };
-  subtract(value) {
-    this.count-=value;
-    this.logF('subtract', value);
-  };
-  multiply (value) {
-    this.count*=value;
-    this.logF('multiply', value);
-  };
-  divide (value) {
-    this.count/=value;
-    this.logF('divide', value);
-  };
-  get value(){
-    return this.count
-  };
-  set value(init){
-    
+    this.count += value;
+    this.logF("add", value);
   }
-  
-
-};
+  subtract(value) {
+    this.count -= value;
+    this.logF("subtract", value);
+  }
+  multiply(value) {
+    this.count *= value;
+    this.logF("multiply", value);
+  }
+  divide(value) {
+    this.count /= value;
+    this.logF("divide", value);
+  }
+  get value() {
+    return this.count;
+  }
+  set value(init) {}
+}
