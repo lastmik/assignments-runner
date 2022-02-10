@@ -1,5 +1,5 @@
 export function mapTo(array, property) {
-  // TODO:
+  // TODO: Check existence instead
   if (typeof property === "undefined")
     return array.map(function (elem) {
       return array.indexOf(elem);
@@ -29,6 +29,7 @@ export function mapToProfile(array) {
         return this.age >= 60;
       },
       get isAnonymous() {
+        // TODO: Check Logical Not !
         return this.fullname ? false : true;
       },
     };
@@ -43,6 +44,7 @@ export function mapToProfile(array) {
   });
 }
 
+// TODO: Fix typo
 export function filterBy(array, propertys) {
   // TODO:
   if (typeof propertys === "number")
@@ -55,7 +57,7 @@ export function filterBy(array, propertys) {
 }
 
 export function reduceTo(array, propertys) {
-  // TODO:
+  // TODO: Check usage and put in appropriate place
   let resultArray = [];
   if (!propertys)
     return array.reduce(
@@ -79,6 +81,7 @@ export function reduceTo(array, propertys) {
   }
 }
 
+// TODO: Refactor, reduce complexity
 export function sort(array, filter) {
   // TODO:
   return array.sort(sortArray);
@@ -89,6 +92,7 @@ export function sort(array, filter) {
     } else if (filter === "age") {
       return a.age - b.age;
     } else if (typeof filter[0] !== "object" && typeof filter[1] !== "object") {
+  
       return (
         2 *
           (a[filter[0]] > b[filter[0]]
@@ -140,7 +144,7 @@ export function sort(array, filter) {
 }
 
 export function complex(array, operations) {
-  // TODO:
+  // TODO: Refactor to reduce
   let arrayResult;
   let result;
 
@@ -161,6 +165,8 @@ export function complex(array, operations) {
   if (!result) return arrayResult;
   else return result;
 
+  // TODO: Move these functions outside of this function
+  // Please, don't mutate data without heavy need
   function filtering(properties) {
     array = array.filter((elem) =>
       properties.callback(elem[properties.property])
@@ -182,8 +188,10 @@ export function complex(array, operations) {
 
   function sorting(properties) {
     if (properties.order === "desc") {
+      // TODO: Refactor, don't use shortcuts
       arrayResult = arrayResult.sort((a, b) => b - a);
     }
+    // TODO: Remove unused code
     // else{
     // arrayResult = arrayResult.sort((a,b)=> a - b);
     // }

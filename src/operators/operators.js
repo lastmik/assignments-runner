@@ -1,3 +1,4 @@
+// TODO: Please, use curly braces for code blocks
 export function add(a, b) {
   let result = a + b;
   if (!isFinite(result) || typeof a != "number" || typeof b != "number")
@@ -22,6 +23,7 @@ export function complex(a, b) {
 
   let result = (a[0] * a[1]) ** (b[0] / b[1]);
 
+  // TODO: Please, check if we need to compute result after defining the isNumber
   if (!isFinite(result) || !isNumber) return null;
   else return result;
 }

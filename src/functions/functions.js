@@ -5,6 +5,7 @@ export function counter(initial, counterName) {
   return counter.count(initial);
 }
 
+// TODO: Move to class
 function GetCounter(initial, name) {
   var counter;
   if (typeof initial === "string") {
@@ -24,7 +25,9 @@ function GetCounter(initial, name) {
   return counter;
 }
 
+// TODO: Move to class
 function CreateCounter(initial, name) {
+  // TODO: Please, check existence instead
   if (typeof initial === "undefined") {
     Counters.set("default", new Counter());
     return Counters.get("default");
@@ -56,7 +59,7 @@ class Counter {
 let Counters = new Map();
 
 export function callableMultiplier(...args) {
-  // TODO:
+  // TODO: Remove unused code
   let count = null;
   // if(!args)
   // return result;
@@ -87,6 +90,7 @@ class Calculator {
   logs;
   count;
   constructor(count) {
+    // TODO: Move count and logs initializers to property declaration
     typeof count === "number" ? (this.count = count) : (this.count = 0);
 
     this.logs = [];
@@ -95,6 +99,7 @@ class Calculator {
   get log() {
     return this.logs;
   }
+  // TODO: Rename according to functionality
   logF(operation, value) {
     this.logs.push({ operation, value });
   }
