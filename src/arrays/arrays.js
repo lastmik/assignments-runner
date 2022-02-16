@@ -55,8 +55,6 @@ export function filterBy(array, propertys) {
 }
 
 export function reduceTo(array, propertys) {
-  // TODO: Check usage and put in appropriate place
-  let resultArray = [];
   if (!propertys)
     return array.reduce(
       (previousValue, currentValue) => previousValue + currentValue
@@ -67,8 +65,9 @@ export function reduceTo(array, propertys) {
       0
     );
   } else {
+    let resultArray;
     propertys.forEach((property) => {
-      resultArray.push(
+       resultArray.push(
         array.reduce(
           (accumulator, currentValue) => accumulator + currentValue[property],
           0
