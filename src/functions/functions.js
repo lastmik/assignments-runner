@@ -1,31 +1,38 @@
 export function counter(initial, counterName) {
   // TODO:
+  var counter = new Counter();
+  return counter.GetCounter(initial, counterName).count(initial);
 
-  var counter = GetCounter(initial, counterName);
-  return counter.count(initial);
+}
 
-  // TODO: Move to class
-  function GetCounter(initial, name) {
-    var counter;
+class Counter {
+  result;
+  counter;
+  constructor() {
+    this.result = 0;
+  }
+  count(initial) {
+    if (typeof initial === "number") this.result = initial;
+    return this.result++;
+
+  }
+  GetCounter(initial, name) {
     if (typeof initial === "string") {
       Counters.get("default").result = 0;
-      counter = Counters.get(initial);
+      this.counter = Counters.get(initial);
     } else if (typeof name === "string") {
       Counters.get("default").result = 0;
-      counter = Counters.get(name);
+      this.counter = Counters.get(name);
     } else {
-      counter = Counters.get("default");
+      this.counter = Counters.get("default");
     }
-
-    if (!counter) {
-      counter = CreateCounter(initial);
-      return counter;
+    if (!this.counter) {
+      this.counter = this.CreateCounter(initial);
+      return this.counter;
     }
-    return counter;
+    return this.counter;
   }
-
-  // TODO: Move to class
-  function CreateCounter(initial) {
+  CreateCounter(initial) {
     if (!initial) {
       Counters.set("default", new Counter());
       return Counters.get("default");
@@ -33,17 +40,6 @@ export function counter(initial, counterName) {
       Counters.set(initial, new Counter());
       return Counters.get(initial);
     }
-  }
-}
-
-class Counter {
-  result;
-  constructor() {
-    this.result = 0;
-  }
-  count(initial) {
-    if (typeof initial === "number") this.result = initial;
-    return this.result++;
   }
 }
 let Counters = new Map();
@@ -69,7 +65,6 @@ export function callableMultiplier(...args) {
 
 export function createCalculator(initial) {
   // TODO:
-
   return new Calculator(initial);
 }
 class Calculator {

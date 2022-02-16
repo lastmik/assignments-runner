@@ -42,31 +42,30 @@ export function mapToProfile(array) {
   });
 }
 
-// TODO: Fix typo
-export function filterBy(array, propertys) {
+export function filterBy(array, properties) {
   // TODO:
-  if (typeof propertys === "number")
-    return array.filter((elem) => elem >= propertys);
-  else if (typeof propertys === "string")
-    return array.filter((elem) => elem.hasOwnProperty(propertys));
+  if (typeof properties === "number")
+    return array.filter((elem) => elem >= properties);
+  else if (typeof properties === "string")
+    return array.filter((elem) => elem.hasOwnProperty(properties));
   else {
-    return array.filter((elem) => propertys.filterCb(elem[propertys.property]));
+    return array.filter((elem) => properties.filterCb(elem[properties.property]));
   }
 }
 
-export function reduceTo(array, propertys) {
-  if (!propertys)
+export function reduceTo(array, properties) {
+  if (!properties)
     return array.reduce(
       (previousValue, currentValue) => previousValue + currentValue
     );
-  else if (!Array.isArray(propertys)) {
+  else if (!Array.isArray(properties)) {
     return array.reduce(
-      (accumulator, currentValue) => accumulator + currentValue[propertys],
+      (accumulator, currentValue) => accumulator + currentValue[properties],
       0
     );
   } else {
-    let resultArray;
-    propertys.forEach((property) => {
+    let resultArray =[];
+    properties.forEach((property) => {
        resultArray.push(
         array.reduce(
           (accumulator, currentValue) => accumulator + currentValue[property],

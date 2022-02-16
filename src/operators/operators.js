@@ -1,4 +1,3 @@
-// TODO: Please, use curly braces for code blocks
 export function add(a, b) {
   let result = a + b;
   if (!isFinite(result) || typeof a != "number" || typeof b != "number")
