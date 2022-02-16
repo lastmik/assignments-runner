@@ -1,11 +1,8 @@
 export function add(a, b) {
   let result = a + b;
-  if (!isFinite(result) || typeof a != "number" || typeof b != "number")
-  {
+  if (!isFinite(result) || typeof a != "number" || typeof b != "number") {
     return null;
-  }
-  else
-  { 
+  } else {
     return result;
   }
 }
@@ -13,12 +10,10 @@ export function add(a, b) {
 export function subtract(a, b) {
   // TODO
   let result = a - b;
-  if (typeof a != "number" || typeof b != "number")
-  { 
+  if (typeof a != "number" || typeof b != "number") {
     return null;
-  }
-  else{
-   return result;
+  } else {
+    return result;
   }
 }
 
@@ -28,21 +23,19 @@ export function complex(a, b) {
   let arr = a.concat(b);
   let result = 0;
   arr.forEach((element) => {
-    if (typeof element != "number") 
-    {
+    if (typeof element != "number") {
       isNumber = false;
     }
   });
-  if(isNumber){
-  result = (a[0] * a[1]) ** (b[0] / b[1]);
-  }else{
+  if (isNumber) {
+    result = (a[0] * a[1]) ** (b[0] / b[1]);
+  } else {
     return null;
   }
 
-  if (!isFinite(result)){ 
-  return null;
-  }
-  else{
-  return result;
+  if (!isFinite(result)) {
+    return null;
+  } else {
+    return result;
   }
 }

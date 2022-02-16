@@ -49,7 +49,9 @@ export function filterBy(array, properties) {
   else if (typeof properties === "string")
     return array.filter((elem) => elem.hasOwnProperty(properties));
   else {
-    return array.filter((elem) => properties.filterCb(elem[properties.property]));
+    return array.filter((elem) =>
+      properties.filterCb(elem[properties.property])
+    );
   }
 }
 
@@ -64,9 +66,9 @@ export function reduceTo(array, properties) {
       0
     );
   } else {
-    let resultArray =[];
+    let resultArray = [];
     properties.forEach((property) => {
-       resultArray.push(
+      resultArray.push(
         array.reduce(
           (accumulator, currentValue) => accumulator + currentValue[property],
           0

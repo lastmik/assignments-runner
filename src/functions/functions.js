@@ -2,7 +2,6 @@ export function counter(initial, counterName) {
   // TODO:
   var counter = new Counter();
   return counter.GetCounter(initial, counterName).count(initial);
-
 }
 
 class Counter {
@@ -14,7 +13,6 @@ class Counter {
   count(initial) {
     if (typeof initial === "number") this.result = initial;
     return this.result++;
-
   }
   GetCounter(initial, name) {
     if (typeof initial === "string") {
