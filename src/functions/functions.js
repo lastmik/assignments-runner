@@ -1,5 +1,4 @@
 export function counter(initial, counterName) {
-  // TODO:
   var counter = new Counter();
   return counter.GetCounter(initial, counterName).count(initial);
 }
@@ -14,6 +13,7 @@ class Counter {
     if (typeof initial === "number") this.result = initial;
     return this.result++;
   }
+  // TODO: Use lowerCamelCase
   GetCounter(initial, name) {
     if (typeof initial === "string") {
       Counters.get("default").result = 0;
@@ -30,6 +30,7 @@ class Counter {
     }
     return this.counter;
   }
+   // TODO: Use lowerCamelCase
   CreateCounter(initial) {
     if (!initial) {
       Counters.set("default", new Counter());
@@ -62,7 +63,6 @@ export function callableMultiplier(...args) {
 }
 
 export function createCalculator(initial) {
-  // TODO:
   return new Calculator(initial);
 }
 class Calculator {

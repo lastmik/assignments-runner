@@ -4,6 +4,7 @@ export function mapTo(array, property) {
       return array.indexOf(elem);
     });
   else {
+    // TODO: check const instead
     let result = array.filter((elem) => elem.hasOwnProperty(property));
 
     return result.map(function (elem) {
@@ -13,12 +14,15 @@ export function mapTo(array, property) {
 }
 
 export function mapToProfile(array) {
-  // TODO:
   return array.map(function (elem) {
+    // TODO: check const instead
+    // TODO: check helper function for || null 
     let name = elem.name || null;
     let surname = elem.surname || null;
+    // TODO: check lowerCamelCase
     let fullname = null;
     if (name || surname) {
+      // TODO: check helper function for || "_"
       fullname = (name || "_") + " " + (surname || "_");
     }
     let age = elem.age || null;
@@ -43,7 +47,6 @@ export function mapToProfile(array) {
 }
 
 export function filterBy(array, properties) {
-  // TODO:
   if (typeof properties === "number")
     return array.filter((elem) => elem >= properties);
   else if (typeof properties === "string")
@@ -66,6 +69,7 @@ export function reduceTo(array, properties) {
       0
     );
   } else {
+    // TODO: Refactor resultArray + forEach approach and move into reduce 
     let resultArray = [];
     properties.forEach((property) => {
       resultArray.push(
@@ -80,15 +84,16 @@ export function reduceTo(array, properties) {
 }
 
 export function sort(array, filter) {
-  // TODO:
   return array.sort(sortArray);
 
+  // TODO: Move to top
   function sortArray(a, b) {
     if (!filter) {
       return a - b;
     } else if (typeof filter === "string") {
       return a[filter] - b[filter];
     } else if (typeof filter[0] !== "object" && typeof filter[1] !== "object") {
+      // Move a[filter[0]] and b[filter[0]] into variables
       return a[filter[0]] > b[filter[0]]
         ? 1
         : a[filter[0]] < b[filter[0]]
@@ -122,10 +127,13 @@ export function complex(array, operations) {
         arrayResult = sorting(arrayResult);
     }
   });
+  // TODO: Always use curly braces for such blocks
+  // TODO: Check ternary operator for it
   if (!result) return arrayResult;
   else return result;
 }
 
+// TODO: use verbs for functions
 function filtering(array, properties) {
   return array.filter((elem) => properties.callback(elem[properties.property]));
 }

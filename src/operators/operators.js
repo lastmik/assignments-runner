@@ -1,5 +1,9 @@
+
+// TODO: dont use shortcuts
 export function add(a, b) {
   let result = a + b;
+  // TODO: Check if we can move != "number" into helper function
+  // TODO: Check if we need to use strict equality here instead 
   if (!isFinite(result) || typeof a != "number" || typeof b != "number") {
     return null;
   } else {
@@ -8,7 +12,6 @@ export function add(a, b) {
 }
 
 export function subtract(a, b) {
-  // TODO
   let result = a - b;
   if (typeof a != "number" || typeof b != "number") {
     return null;
@@ -18,7 +21,6 @@ export function subtract(a, b) {
 }
 
 export function complex(a, b) {
-  // TODO:
   let isNumber = true;
   let arr = a.concat(b);
   let result = 0;
@@ -33,6 +35,7 @@ export function complex(a, b) {
     return null;
   }
 
+  // TODO: Check reverse check instead
   if (!isFinite(result)) {
     return null;
   } else {
