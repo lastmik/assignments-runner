@@ -1,8 +1,10 @@
-
-
 export function add(operandA, operandB) {
   let result = operandA + operandB;
-  if (!isFinite(result) || numberCheckHelper(operandA) || numberCheckHelper(operandB)) {
+  if (
+    !isFinite(result) ||
+    numberCheckHelper(operandA) ||
+    numberCheckHelper(operandB)
+  ) {
     return null;
   } else {
     return result;
@@ -33,9 +35,9 @@ export function complex(operandA, operandB) {
     return null;
   }
 
-  return isFinite(result)? result: null;
+  return isFinite(result) ? result : null;
 }
 
-function numberCheckHelper(elem){
-  return typeof elem !=="number"? true:false;
+function numberCheckHelper(elem) {
+  return typeof elem !== "number" ? true : false;
 }

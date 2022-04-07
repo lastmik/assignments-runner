@@ -13,15 +13,13 @@ export function mapTo(array, property) {
 }
 
 export function mapToProfile(array) {
-  
-  function checkHelper(elemA, elemB)
-    {
-      return elemA||elemB
-    };
+  function checkHelper(elemA, elemB) {
+    return elemA || elemB;
+  }
 
   return array.map(function (elem) {
     const name = checkHelper(elem.name, null);
-    const surName = checkHelper(elem.surname ,null);
+    const surName = checkHelper(elem.surname, null);
     let fullName = null;
     if (name || surName) {
       fullName = checkHelper(name, "_") + " " + checkHelper(surName, "_");
@@ -44,9 +42,7 @@ export function mapToProfile(array) {
     obj.age = age;
 
     return obj;
-    
   });
-  
 }
 
 export function filterBy(array, properties) {
@@ -72,10 +68,12 @@ export function reduceTo(array, properties) {
       0
     );
   } else {
-    
-    return properties.map((property)=>{
-     return array.reduce((accumulator, currentValue) => accumulator + currentValue[property], 0)
-    }) 
+    return properties.map((property) => {
+      return array.reduce(
+        (accumulator, currentValue) => accumulator + currentValue[property],
+        0
+      );
+    });
   }
 }
 
@@ -129,8 +127,7 @@ export function complex(array, operations) {
     }
   });
 
-  return !result? arrayResult:result;
-
+  return !result ? arrayResult : result;
 }
 
 function filterArray(array, properties) {
