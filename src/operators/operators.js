@@ -1,44 +1,41 @@
 
-// TODO: dont use shortcuts
-export function add(a, b) {
-  let result = a + b;
-  // TODO: Check if we can move != "number" into helper function
-  // TODO: Check if we need to use strict equality here instead 
-  if (!isFinite(result) || typeof a != "number" || typeof b != "number") {
+
+export function add(operandA, operandB) {
+  let result = operandA + operandB;
+  if (!isFinite(result) || numberCheckHelper(operandA) || numberCheckHelper(operandB)) {
     return null;
   } else {
     return result;
   }
 }
 
-export function subtract(a, b) {
-  let result = a - b;
-  if (typeof a != "number" || typeof b != "number") {
+export function subtract(operandA, operandB) {
+  let result = operandA - operandB;
+  if (numberCheckHelper(operandA) || numberCheckHelper(operandB)) {
     return null;
   } else {
     return result;
   }
 }
 
-export function complex(a, b) {
+export function complex(operandA, operandB) {
   let isNumber = true;
-  let arr = a.concat(b);
+  let arr = operandA.concat(operandB);
   let result = 0;
   arr.forEach((element) => {
-    if (typeof element != "number") {
+    if (numberCheckHelper(element)) {
       isNumber = false;
     }
   });
   if (isNumber) {
-    result = (a[0] * a[1]) ** (b[0] / b[1]);
+    result = (operandA[0] * operandA[1]) ** (operandB[0] / operandB[1]);
   } else {
     return null;
   }
 
-  // TODO: Check reverse check instead
-  if (!isFinite(result)) {
-    return null;
-  } else {
-    return result;
-  }
+  return isFinite(result)? result: null;
+}
+
+function numberCheckHelper(elem){
+  return typeof elem !=="number"? true:false;
 }

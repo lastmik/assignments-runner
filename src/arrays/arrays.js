@@ -4,8 +4,7 @@ export function mapTo(array, property) {
       return array.indexOf(elem);
     });
   else {
-    // TODO: check const instead
-    let result = array.filter((elem) => elem.hasOwnProperty(property));
+    const result = array.filter((elem) => elem.hasOwnProperty(property));
 
     return result.map(function (elem) {
       return elem[property];
@@ -14,16 +13,18 @@ export function mapTo(array, property) {
 }
 
 export function mapToProfile(array) {
+  
+  function checkHelper(elemA, elemB)
+    {
+      return elemA||elemB
+    };
+
   return array.map(function (elem) {
-    // TODO: check const instead
-    // TODO: check helper function for || null 
-    let name = elem.name || null;
-    let surname = elem.surname || null;
-    // TODO: check lowerCamelCase
-    let fullname = null;
-    if (name || surname) {
-      // TODO: check helper function for || "_"
-      fullname = (name || "_") + " " + (surname || "_");
+    const name = checkHelper(elem.name, null);
+    const surName = checkHelper(elem.surname ,null);
+    let fullName = null;
+    if (name || surName) {
+      fullName = checkHelper(name, "_") + " " + checkHelper(surName, "_");
     }
     let age = elem.age || null;
 
@@ -38,12 +39,14 @@ export function mapToProfile(array) {
 
     let obj = Object.create(proto);
     obj.name = name;
-    obj.surname = surname;
-    obj.fullname = fullname;
+    obj.surname = surName;
+    obj.fullname = fullName;
     obj.age = age;
 
     return obj;
+    
   });
+  
 }
 
 export function filterBy(array, properties) {
@@ -69,44 +72,42 @@ export function reduceTo(array, properties) {
       0
     );
   } else {
-    // TODO: Refactor resultArray + forEach approach and move into reduce 
-    let resultArray = [];
-    properties.forEach((property) => {
-      resultArray.push(
-        array.reduce(
-          (accumulator, currentValue) => accumulator + currentValue[property],
-          0
-        )
-      );
-    });
-    return resultArray;
+    
+    return properties.map((property)=>{
+     return array.reduce((accumulator, currentValue) => accumulator + currentValue[property], 0)
+    }) 
   }
 }
 
 export function sort(array, filter) {
-  return array.sort(sortArray);
+  let elementA;
+  let elementB;
 
-  // TODO: Move to top
   function sortArray(a, b) {
     if (!filter) {
       return a - b;
     } else if (typeof filter === "string") {
       return a[filter] - b[filter];
     } else if (typeof filter[0] !== "object" && typeof filter[1] !== "object") {
-      // Move a[filter[0]] and b[filter[0]] into variables
-      return a[filter[0]] > b[filter[0]]
+      elementA = a[filter[0]];
+      elementB = b[filter[0]];
+      return elementA > elementB
         ? 1
-        : a[filter[0]] < b[filter[0]]
+        : elementA < elementB
         ? -1
         : a[filter[1]] - b[filter[1]];
     } else {
-      return a[filter[0]] > b[filter[0]]
+      elementA = a[filter[0]];
+      elementB = b[filter[0]];
+      return elementA > elementB
         ? 1
-        : a[filter[0]] < b[filter[0]]
+        : elementA < elementB
         ? -1
         : b[filter[1].field] - a[filter[1].field];
     }
   }
+
+  return array.sort(sortArray);
 }
 
 export function complex(array, operations) {
@@ -116,34 +117,32 @@ export function complex(array, operations) {
   operations.forEach((element) => {
     switch (element.operation) {
       case "filter":
-        arrayResult = filtering(array, element);
+        arrayResult = filterArray(array, element);
         break;
       case "map":
-        arrayResult = mapping(arrayResult, element);
+        arrayResult = mapArray(arrayResult, element);
         break;
       case "reduce":
-        result = reducing(arrayResult, element);
+        result = reduceArray(arrayResult, element);
       case "sort":
-        arrayResult = sorting(arrayResult);
+        arrayResult = sortArray(arrayResult);
     }
   });
-  // TODO: Always use curly braces for such blocks
-  // TODO: Check ternary operator for it
-  if (!result) return arrayResult;
-  else return result;
+
+  return !result? arrayResult:result;
+
 }
 
-// TODO: use verbs for functions
-function filtering(array, properties) {
+function filterArray(array, properties) {
   return array.filter((elem) => properties.callback(elem[properties.property]));
 }
 
-function mapping(array, properties) {
+function mapArray(array, properties) {
   return array.map(function (elem) {
     return elem[properties.property];
   });
 }
-function reducing(array, properties) {
+function reduceArray(array, properties) {
   return array.reduce(
     (accumulator, currentValue) =>
       accumulator + currentValue[properties.property],
@@ -151,6 +150,6 @@ function reducing(array, properties) {
   );
 }
 
-function sorting(arrayResult) {
+function sortArray(arrayResult) {
   return arrayResult.sort((a, b) => b - a);
 }

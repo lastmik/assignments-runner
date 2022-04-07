@@ -1,6 +1,6 @@
 export function counter(initial, counterName) {
   var counter = new Counter();
-  return counter.GetCounter(initial, counterName).count(initial);
+  return counter.getCounter(initial, counterName).count(initial);
 }
 
 class Counter {
@@ -13,8 +13,8 @@ class Counter {
     if (typeof initial === "number") this.result = initial;
     return this.result++;
   }
-  // TODO: Use lowerCamelCase
-  GetCounter(initial, name) {
+
+  getCounter(initial, name) {
     if (typeof initial === "string") {
       Counters.get("default").result = 0;
       this.counter = Counters.get(initial);
@@ -25,13 +25,13 @@ class Counter {
       this.counter = Counters.get("default");
     }
     if (!this.counter) {
-      this.counter = this.CreateCounter(initial);
+      this.counter = this.createCounter(initial);
       return this.counter;
     }
     return this.counter;
   }
-   // TODO: Use lowerCamelCase
-  CreateCounter(initial) {
+
+  createCounter(initial) {
     if (!initial) {
       Counters.set("default", new Counter());
       return Counters.get("default");
